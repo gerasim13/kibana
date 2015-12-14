@@ -9,8 +9,7 @@ RUN tar xzf /tmp/kibana-${KIBANA_VERSION}-linux-x64.tar.gz -C / && \
     ln -s /usr/bin/npm /kibana-${KIBANA_VERSION}-linux-x64/node/bin/npm && \
     sed -i '/elasticsearch_url/s/localhost/elasticsearch/' /kibana-${KIBANA_VERSION}-linux-x64/config/kibana.yml
 
-RUN apk del build-base gfortran && \
-    rm -rf /root/.cache/pip/* && \
+RUN rm -rf /root/.cache/pip/* && \
     rm -rf /var/cache/apk/* && \
     rm -rf /tmp/*
 
