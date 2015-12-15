@@ -1,6 +1,8 @@
 FROM gerasim13/nodejs
 
 COPY ./docker-entrypoint.sh /
+RUN apk --update add bash
+RUN bash /docker-entrypoint.sh
 ENV KIBANA_VERSION 4.3.0
 ENV PATH /opt/kibana/bin:$PATH
 RUN set -x \
@@ -11,5 +13,5 @@ RUN set -x \
 	&& rm /tmp/kibana.tar.gz
 
 EXPOSE 5601
-ENTRYPOINT ["/bin/sh /docker-entrypoint.sh"]
+ENTRYPOINT ["/bin/bash /docker-entrypoint.sh"]
 CMD ["kibana"]
