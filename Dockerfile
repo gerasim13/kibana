@@ -4,11 +4,11 @@ COPY ./docker-entrypoint.sh /
 ENV KIBANA_VERSION 4.3.0
 ENV PATH /opt/kibana/bin:$PATH
 RUN set -x \
-	&& curl -fSL "https://download.elastic.co/kibana/kibana/kibana-${KIBANA_VERSION}-linux-x64.tar.gz" -o kibana.tar.gz \
-	&& mkdir -p /opt/kibana \
-	&& tar -xz -C /opt/kibana -f kibana.tar.gz \
-  && mv /opt/kibana/kibana/* /opt/kibana \
-	&& rm kibana.tar.gz
+  && curl -fSL "https://download.elastic.co/kibana/kibana/kibana-${KIBANA_VERSION}-linux-x64.tar.gz" -o /tmp/kibana.tar.gz \
+  && mkdir -p /opt \
+	&& tar -xz -C /opt -f /tmp/kibana.tar.gz \
+  && mv /opt/kibana-${KIBANA_VERSION}-linux-x64 /opt/kibana \
+	&& rm /tmp/kibana.tar.gz
 
 EXPOSE 5601
 ENTRYPOINT ["/docker-entrypoint.sh"]
