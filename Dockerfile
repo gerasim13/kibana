@@ -14,8 +14,8 @@ RUN set -x \
   && chmod +x /usr/local/bin/gosu \
   && mkdir -p /opt \
 	&& tar -xz -C /opt -f /tmp/kibana.tar.gz \
-  && rm /opt/kibana-${KIBANA_VERSION}-linux-x64/node/bin/node && \
-  && rm /opt/kibana-${KIBANA_VERSION}-linux-x64/node/bin/npm && \
+  && rm /opt/kibana-${KIBANA_VERSION}-linux-x64/node/bin/node \
+  && rm /opt/kibana-${KIBANA_VERSION}-linux-x64/node/bin/npm \
   && mv /opt/kibana-${KIBANA_VERSION}-linux-x64 /opt/kibana \
 	&& rm /tmp/kibana.tar.gz \
   && rm -rf /var/cache/apk/*
