@@ -7,7 +7,7 @@ RUN set -x \
 	&& curl -fSL "https://download.elastic.co/kibana/kibana/kibana-${KIBANA_VERSION}-linux-x64.tar.gz" -o kibana.tar.gz \
 	&& mkdir -p /opt/kibana \
 	&& tar -xz -C /opt/kibana -f kibana.tar.gz \
-  && mx /opt/kibana/kibana/* /opt/kibana \
+  && mv /opt/kibana/kibana/* /opt/kibana \
 	&& rm kibana.tar.gz
 
 EXPOSE 5601
