@@ -14,4 +14,4 @@ RUN rm -rf /root/.cache/pip/* && \
     rm -rf /tmp/*
 
 EXPOSE 5601
-CMD ["/kibana-4.0.2-linux-x64/bin/kibana"]
+CMD ["/kibana-4.3.0-linux-x64/bin/kibana"]
