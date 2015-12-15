@@ -11,5 +11,5 @@ RUN set -x \
 	&& rm /tmp/kibana.tar.gz
 
 EXPOSE 5601
-ENTRYPOINT ["/docker-entrypoint.sh"]
+ENTRYPOINT ["/bin/sh /docker-entrypoint.sh"]
 CMD ["kibana"]
