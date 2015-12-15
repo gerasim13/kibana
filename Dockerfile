@@ -1,6 +1,8 @@
 FROM gerasim13/nodejs
 
 COPY ./docker-entrypoint.sh /
+
+RUN addgroup -S kibana && adduser -S -D -H -G kibana kibana
 RUN apk --update add bash
 RUN bash /docker-entrypoint.sh
 ENV KIBANA_VERSION 4.3.0
