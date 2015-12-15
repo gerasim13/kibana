@@ -1,17 +1,14 @@
 FROM gerasim13/nodejs
 
+COPY ./docker-entrypoint.sh /
 ENV KIBANA_VERSION 4.3.0
-ADD https://download.elastic.co/kibana/kibana/kibana-${KIBANA_VERSION}-linux-x64.tar.gz /tmp/kibana-${KIBANA_VERSION}-linux-x64.tar.gz
-RUN tar xzf /tmp/kibana-${KIBANA_VERSION}-linux-x64.tar.gz -C / && \
-    rm /kibana-${KIBANA_VERSION}-linux-x64/node/bin/node && \
-    rm /kibana-${KIBANA_VERSION}-linux-x64/node/bin/npm && \
-    ln -s /usr/bin/node /kibana-${KIBANA_VERSION}-linux-x64/node/bin/node && \
-    ln -s /usr/bin/npm /kibana-${KIBANA_VERSION}-linux-x64/node/bin/npm && \
-    sed -i '/elasticsearch_url/s/localhost/elasticsearch/' /kibana-${KIBANA_VERSION}-linux-x64/config/kibana.yml
-
-RUN rm -rf /root/.cache/pip/* && \
-    rm -rf /var/cache/apk/* && \
-    rm -rf /tmp/*
+ENV PATH /opt/kibana/bin:$PATH
+RUN set -x \
+	&& curl -fSL "https://download.elastic.co/kibana/kibana/kibana-${KIBANA_VERSION}-linux-x64.tar.gz" -o kibana.tar.gz \
+	&& mkdir -p /opt/kibana \
+	&& tar -xz --strip-components=1 -C /opt/kibana -f kibana.tar.gz \
+	&& rm kibana.tar.gz
 
 EXPOSE 5601
-CMD ["/kibana-4.3.0-linux-x64/bin/kibana"]
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["kibana"]
