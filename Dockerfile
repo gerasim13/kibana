@@ -17,6 +17,7 @@ RUN set -x \
   && rm /opt/kibana-${KIBANA_VERSION}-linux-x64/node/bin/node \
   && rm /opt/kibana-${KIBANA_VERSION}-linux-x64/node/bin/npm \
   && mv /opt/kibana-${KIBANA_VERSION}-linux-x64 /opt/kibana \
+  && chown -R kibana:kibana /opt/kibana \
 	&& rm /tmp/kibana.tar.gz \
   && rm -rf /var/cache/apk/*
 
